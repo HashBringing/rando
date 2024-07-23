@@ -1,0 +1,24 @@
+#Random things I have found useful during an investigation as a security analyst. Tried to put where user input is required in backets { }
+
+#POWERSHELL
+
+**List Startup Items
+Get-CimInstance -ClassName Win32_StartupCommand | Select-Object -Property Command, Description, User, Location, Name
+
+**Remove Registry Item
+Remove-ItemProperty -Path Registry::HKU\{Path}\SOFTWARE\Microsoft\Windows\CurrentVersion\Run -Name {NAME}
+
+**Get Registry Item
+Get-Item -path {HKLM:HKEY_Local_Machine}
+
+**Delete Item
+Remove-Item "C:\{PATH}"
+
+**Kill All Child Processes
+TASKILL /F /IM {FILE.EXE} /T
+
+**Remove Shceduled Task 
+Unregister-ScheduledTask -TaskName "{TaskName}"
+
+**Finding where DLL is running (hit or miss)
+Get=Process | where {$_.Modules -match '{DLL}' | select ID, ProcessName
